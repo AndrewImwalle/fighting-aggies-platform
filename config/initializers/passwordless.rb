@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Passwordless.default_from_address = 'Fighting_Aggies_Application@example.com'
 Passwordless.parent_mailer = 'ActionMailer::Base'
 Passwordless.token_generator = Passwordless::UrlSafeBase64Generator.new # Used to generate magic link tokens.

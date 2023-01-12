@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'selenium-webdriver'
 
 Given(/the following users exist/) do |users_table|

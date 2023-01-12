@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 class Analysis < ApplicationRecord
   belongs_to :video
   def initialize(video_id)
     # Return if video does not exist
-    raise 'Video with id ' + video_id.to_s + ' does not exist' and return unless Video.exists?(id: video_id)
+    raise "Video with id #{video_id} does not exist" and return unless Video.exists?(id: video_id)
 
     vision = Vision.find_by(video_id:)
     vision = Vision.create(video_id) if vision.nil?
 
     # Return if analysis exists for the requested video_id
-    raise 'Analysis for video with id ' + video_id.to_s + ' already exists' and return if Analysis.exists?(video_id:)
+    raise "Analysis for video with id #{video_id} already exists" and return if Analysis.exists?(video_id:)
 
     report = generate_random_report(vision.report)
 

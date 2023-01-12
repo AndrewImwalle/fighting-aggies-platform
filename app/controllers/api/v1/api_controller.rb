@@ -1,27 +1,33 @@
+# frozen_string_literal: true
+
 # Possible future step: Integrate with user authentication via HTTP
 
-class Api::V1::ApiController < ActionController::Base
-  before_action :check_basic_auth
-  skip_before_action :verify_authenticity_token
+module Api
+  module V1
+    class ApiController < ActionController::Base
+      before_action :check_basic_auth
+      skip_before_action :verify_authenticity_token
 
-  private
+      private
 
-  def check_basic_auth
-    unless request.authorization.present?
-      head :unauthorized
-      return
-    end
+      def check_basic_auth
+        unless request.authorization.present?
+          head :unauthorized
+          return
+        end
 
-    authenticate_with_http_basic do |email, password|
-      user = User.find_by(email: email.downcase)
+        authenticate_with_http_basic do |email, password|
+          user = User.find_by(email: email.downcase)
 
-      if user && user.authenticate(password)
-        @current_user = user
-      else
-        head :unauthorized
+          if user&.authenticate(password)
+            @current_user = user
+          else
+            head :unauthorized
+          end
+        end
       end
+
+      attr_reader :current_user
     end
   end
-
-  attr_reader :current_user
 end

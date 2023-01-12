@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class VisionTest < ActiveSupport::TestCase
@@ -11,7 +13,7 @@ class VisionTest < ActiveSupport::TestCase
       Vision.new(invalid_id)
     end
 
-    assert_equal 'Video with id ' + invalid_id.to_s + ' does not exist', error.message
+    assert_equal "Video with id #{invalid_id} does not exist", error.message
   end
 
   test 'Duplicated video id' do
@@ -27,7 +29,7 @@ class VisionTest < ActiveSupport::TestCase
     error = assert_raise(StandardError) do
       Vision.new(last_video_id)
     end
-    assert_equal 'Raw data for video with id ' + last_video_id.to_s + ' already exists', error.message
+    assert_equal "Raw data for video with id #{last_video_id} already exists", error.message
 
     # destroy dummy video from db. Cascade delete from video also deletes vision
     last_video.destroy

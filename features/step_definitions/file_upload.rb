@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Given('the user has uploaded a good file') do
   pending
 end

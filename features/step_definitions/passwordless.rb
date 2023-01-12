@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Given(I am on the home page)
 #     And I click "Log In with Email Link"
 #     Then I should be on the sign_in page

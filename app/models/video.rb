@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Video < ApplicationRecord
   has_one :analysis, dependent: :destroy
   has_one :vision, dependent: :destroy
@@ -16,7 +18,7 @@ class Video < ApplicationRecord
   private
 
   def process_video(video_path)
-    raise 'Video file does not exist' and return unless video_path and File.exist?(video_path)
+    raise 'Video file does not exist' and return unless video_path && File.exist?(video_path)
 
     ffmpeg_video = FFMPEG::Movie.new(video_path)
     raise 'Cannot read the video file' and return unless ffmpeg_video.valid?
@@ -27,14 +29,14 @@ class Video < ApplicationRecord
     frame_rate = ffmpeg_video.frame_rate.to_f.round(2) # float
 
     thumbnail_path = File.join(File.dirname(video_path),
-                               File.basename(video_path, File.extname(video_path)) + '.jpg')
+                               "#{File.basename(video_path, File.extname(video_path))}.jpg")
     ffmpeg_video.screenshot(thumbnail_path, resolution: '320x240')
     thumbnail_path = thumbnail_path
 
     [thumbnail_path, resolution, size, duration, frame_rate]
   end
 
-  VID_FORMATS = %w[.avi .flv .mkv .mov .mp4] # add more extensions if anything is left
+  VID_FORMATS = %w[.avi .flv .mkv .mov .mp4].freeze # add more extensions if anything is left
   def check_video_ext(file_path)
     VID_FORMATS.include? File.extname(file_path)
   end

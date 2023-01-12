@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require('capybara/rails')
 require 'omniauth'
 # extra.id_info.email
