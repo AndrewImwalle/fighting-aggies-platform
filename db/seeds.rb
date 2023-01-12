@@ -28,4 +28,3 @@ initial_users = [
 initial_users.each do |user|
   User.create!(user)
 end
-

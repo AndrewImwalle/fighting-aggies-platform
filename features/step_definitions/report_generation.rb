@@ -13,4 +13,3 @@ end
 Then('the reports pane should be populated') do
   pending
 end
-

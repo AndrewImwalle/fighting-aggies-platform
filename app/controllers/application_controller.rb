@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  include Passwordless::ControllerHelpers 
+  include Passwordless::ControllerHelpers
 
   helper_method :current_user
 
@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
       redirect_to dashboard_path
     elsif session[:admin].blank? || !session[:admin]
       redirect_to root_path
-      flash[:notice] = "Please login as an administrator."
+      flash[:notice] = 'Please login as an administrator.'
     end
   end
 
@@ -17,14 +17,14 @@ class ApplicationController < ActionController::Base
       redirect_to admin_path
     elsif session[:coach].blank? || !session[:coach]
       redirect_to root_path
-      flash[:notice] = "Please login as a coach."
+      flash[:notice] = 'Please login as a coach.'
     end
   end
 
   def logout
-    session[:authenticated]=false
-    session[:coach]=false
-    session[:admin]=false
+    session[:authenticated] = false
+    session[:coach] = false
+    session[:admin] = false
     redirect_to root_path
   end
 

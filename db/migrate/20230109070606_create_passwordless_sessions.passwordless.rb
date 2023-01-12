@@ -3,12 +3,12 @@
 # This migration comes from passwordless (originally 20171104221735)
 class CreatePasswordlessSessions < ActiveRecord::Migration[5.1]
   def change
-    drop_table :passwordless_sessions if (table_exists? :passwordless_sessions)
+    drop_table :passwordless_sessions if table_exists? :passwordless_sessions
     create_table(:passwordless_sessions) do |t|
       t.belongs_to(
         :authenticatable,
         polymorphic: true,
-        index: {name: "authenticatable"}
+        index: { name: 'authenticatable' }
       )
 
       t.datetime(:timeout_at, null: false)

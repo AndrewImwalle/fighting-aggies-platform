@@ -35,7 +35,7 @@ ActionController::Base.allow_rescue = false
 begin
   DatabaseCleaner.strategy = :transaction
 rescue NameError
-  raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
+  raise 'You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it.'
 end
 
 # You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.
@@ -62,7 +62,7 @@ Capybara.register_driver :selenium do |app|
   options = Selenium::WebDriver::Chrome::Options.new
   options.add_argument('headless')
   options.add_argument('no-sandbox')
-  Capybara::Selenium::Driver.new(app, :browser => :chrome, options: options)
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options:)
 end
 
 require 'simplecov'
@@ -79,16 +79,16 @@ Before do |_scenario|
   @dummy_file_loc = dummy_video_path
   @good_file_loc = File.join(current_dir, 'storage', 'supplementary_video.mp4')
   FileUtils.touch(dummy_video_path)
-  Capybara.default_host = 'http://localhost:3000' #This is very important!
+  Capybara.default_host = 'http://localhost:3000' # This is very important!
 
   OmniAuth.config.test_mode = true
   OmniAuth.config.add_mock(:default, {
-  :info => {
-          :email => 'faaplicationuser@gmail.com',
-          :name => 'test user',
-          :password => 'password2023'
-       }
-})
+                             info: {
+                               email: 'faaplicationuser@gmail.com',
+                               name: 'test user',
+                               password: 'password2023'
+                             }
+                           })
 end
 
 After do |_scenario|

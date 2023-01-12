@@ -1,6 +1,5 @@
 # Possible future step: Integrate with user authentication via HTTP
 
-
 class Api::V1::ApiController < ActionController::Base
   before_action :check_basic_auth
   skip_before_action :verify_authenticity_token
@@ -24,7 +23,5 @@ class Api::V1::ApiController < ActionController::Base
     end
   end
 
-  def current_user
-    @current_user
-  end
+  attr_reader :current_user
 end
