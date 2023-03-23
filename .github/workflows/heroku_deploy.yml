@@ -24,7 +24,7 @@ jobs:
         cache: 'yarn'
 
     - name: Install gem dependencies
-      run: bundle install
+      run: bundle install --full-index
 
     - name: Install yarn dependencies
       run: yarn install
@@ -58,7 +58,7 @@ jobs:
         cache: 'yarn'
     
     - name: Install gem dependencies
-      run: bundle install --ful-index
+      run: bundle install --full-index
     
     - name: Install yarn dependencies
       run: yarn install
