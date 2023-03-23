@@ -30,6 +30,9 @@ class PracticeVideo < ApplicationRecord
       hash['practice_id'] = new_string
       hash['timestamp_start'] = int_to_time_string(hash['timestamp_start'].to_i)
       hash['timestamp_end'] = int_to_time_string(hash['timestamp_end'].to_i)
+      datetime_format = '%m/%d/%Y'
+      hash['date'] = DateTime.strptime(hash['date'], datetime_format)
+
       output_hashes << hash
     end
     output_hashes.shuffle!

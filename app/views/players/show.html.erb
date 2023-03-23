@@ -45,7 +45,8 @@
     <h1><%= @player.name.split(", ")[1] %> <%= @player.name.split(", ")[0]  %>'s Report Card</h1>
   </div>
   <div class="col-md-4" style="height: 170px; display: flex; align-items: flex-end;">
-    <h3><%=@start_date%>-<%=@end_date%></h3>
+<h3>Date: <%= @start_date.strftime('%b %e %Y') %> - <%= @end_date.strftime('%b %e %Y') %></h3>
+
   </div>
 </div>
 
@@ -83,7 +84,12 @@
             <tr>
               <td>
               <%if success_rate>0%>
-                <%= link_to route_name, players_show_path(player_id: @player_id, routes: @routes.join(","), route: route_name) %>
+                <%=route_name%>
+              <%if @routes.include? route_name%>
+                <%= link_to "-", players_show_path(player_id: @player_id, routes: @routes.join(","), route: route_name, start_date: @start_date, end_date: @end_date), title: "Click to remove from graph", style: "text-decoration: none" %>
+              <%else%>
+                <%= link_to "+", players_show_path(player_id: @player_id, routes: @routes.join(","), route: route_name, start_date: @start_date, end_date: @end_date), title: "Click to add to graph", style: "text-decoration: none" %>
+              <%end%>
               <%else%>
                 <%=route_name%>
               <%end%>
@@ -103,14 +109,14 @@
   var chart = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: [<%@routePracticeIds.each do |id|%>
+      labels: [<%@route_practice_ids.each do |id|%>
                 <%=id%>,
                 <%end%>
       ],
       datasets: [<% @routes.each_with_index do |routeName, index|%>
         {
         label: "<%=routeName%>",
-        data: [<%@dataByRoute[routeName].each do |data|%>
+        data: [<%@data_by_route[routeName].each do |data|%>
                 <%=data%>,
               <%end%>],
         borderColor: colors[<%=index%> % colors.length],

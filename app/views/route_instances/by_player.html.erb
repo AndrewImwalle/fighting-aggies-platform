@@ -119,15 +119,20 @@ console.log(<%=@all_routes.to_json%>)
         <td><%= link_to Player.find_by(id: player_id).name, players_show_path(id: player_id) %></td>
         <% success_count = 0 %>
         <% total_count = 0 %>
-        <% routes.keys.flatten.sort.uniq.each do |route| %>
+        <% @routes.each do |route| %>
+          <%if route=="overall"%>
+          <%next%>
+          <%end%>
           <% if routes[route].present? %>
             <% success_count += routes[route][0] %>
             <% total_count += routes[route][1] %>
             <% if @routes.include?(route)%>
+              <% if routes[route][1]>0%>
               <td><%= number_to_percentage(100 * routes[route][0].to_f / routes[route][1].to_f, precision: 2) %></td>
               <%end%>
+              <%end%>
           <% else %>
-            <td></td>
+            <td>N/A</td>
           <% end %>
         <% end %>
         <%if(@routes.include?("overall"))%>
@@ -137,10 +142,10 @@ console.log(<%=@all_routes.to_json%>)
     <% end %>
   </tbody>
 </table>
-<%elsif @data.length ==0%>
-<div>No data for date range</div>
-<%else%>
+<%elsif @routes.length==0%>
 <div>No columns selected</div>
+<%else %>
+<div>No data for date range</div>
 <%end%>
 
 </div>

@@ -50,7 +50,7 @@ CSV.foreach('db/seeds/route_instances.csv', headers: true) do |row|
   hash = row.to_hash
   hash['timestamp_start'] = int_to_time_string(hash['timestamp_start'].to_i)
   hash['timestamp_end'] = int_to_time_string(hash['timestamp_end'].to_i)
-  datetime_format = "%m/%d/%Y"
+  datetime_format = '%m/%d/%Y'
   hash['date'] = DateTime.strptime(hash['date'], datetime_format)
   RouteInstance.create!(hash)
 end
