@@ -99,8 +99,6 @@ To create an app password, go to your Google account settings and navigate to th
 
 When using application in development mode, the one time link is in the terminal. When using the application in production mode, the one time email will be sent to the email address of the user.
 
-### Enabling Google OAuth for Website
-
 ### Video Upload Setup:
 
 Videos are saved in the ActiveStorage. A S3 Bucket is being used. 
