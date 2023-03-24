@@ -13,7 +13,7 @@ cd fighting-aggies-platform
 
 Install dependencies (takes a while)
 ```bash
-./install.sh
+./setup.sh
 ~/.bashrc
 ```
 
