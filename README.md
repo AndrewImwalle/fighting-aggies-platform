@@ -67,12 +67,15 @@ Visit https://console.cloud.google.com/ and login
 Then, search for Credentials and click Credentials
 Next, click create credentials and create OAuth client id credentials.
 Then, add the following uris under authorized redirect URIs. These will be the uris that are allowed for the application and will need to be added for dev, test, and production uris.
+
   http://localhost:8080/auth/google_oauth2/callback
   http://127.0.0.1:8080/auth/google_oauth2/callback
   http://www.example.com/auth/google_oauth2/callback
   https://fighting-aggies-platform.herokuapp.com/auth/google_oauth2/callback
   http://fighting-aggies-platform.herokuapp.com/auth/google_oauth2/callback 
+
 If you are trying to login with Google and get an error involving redirect uris these have not been added properly.
+
 Finally, modify the .env file to include the Google Client ID and Google Secret Id for your new application. These will be shown on the right side of the page after the credentials are created.
 
 ### One Time Link Email
